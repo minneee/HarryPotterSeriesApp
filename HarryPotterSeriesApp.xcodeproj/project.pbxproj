@@ -18,7 +18,7 @@
 		F240C1D02E6E6C8B00A6C12A /* Exceptions for "HarryPotterSeriesApp" folder in "HarryPotterSeriesApp" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Resources/Info.plist,
 			);
 			target = F240C1BD2E6E6C8A00A6C12A /* HarryPotterSeriesApp */;
 		};
