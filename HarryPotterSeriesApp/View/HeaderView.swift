@@ -23,18 +23,12 @@ class HeaderView: UIView {
   private let seriesButtonStackView: UIStackView = {
     let stackView = UIStackView()
     stackView.axis = .horizontal
+    stackView.alignment = .center
     stackView.spacing = 8
     return stackView
   }()
 
-  private var seriesNumberButton: UIButton = {
-    let button = UIButton()
-    button.setTitle("1", for: .normal)
-    button.backgroundColor = .systemBlue
-    button.titleLabel?.font = .systemFont(ofSize: 16)
-    button.layer.cornerRadius = 15
-    return button
-  }()
+  var onSeriesButtonTapped: ((Int) -> Void)?
 
   //MARK: - initialize
   override init(frame: CGRect) {
@@ -46,6 +40,34 @@ class HeaderView: UIView {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+
+  func setupSeriesButton(count: Int) {
+    seriesButtonStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+
+    for i in 0..<count {
+      let button = UIButton()
+      button.setTitle("\(i + 1)", for: .normal)
+      button.backgroundColor = .systemBlue
+      button.titleLabel?.font = .systemFont(ofSize: 16)
+      button.layer.cornerRadius = 15
+
+      seriesButtonStackView.addArrangedSubview(button)
+
+      button.tag = i
+      button.addTarget(self, action: #selector(seriesButtonAction(_:)), for: .touchUpInside)
+
+      button.snp.makeConstraints { make in
+        make.width.height.equalTo(30)
+      }
+    }
+  }
+
+  @objc private func seriesButtonAction(_ sender: UIButton) {
+    onSeriesButtonTapped?(sender.tag)
+  }
+
+
+
 }
 
 extension HeaderView {
@@ -57,8 +79,6 @@ extension HeaderView {
     addSubview(bookTitleLable)
     addSubview(seriesButtonStackView)
 
-    seriesButtonStackView.addArrangedSubview(seriesNumberButton)
-
     setupConstraints()
   }
 
@@ -66,22 +86,18 @@ extension HeaderView {
     bookTitleLable.snp.makeConstraints { make in
       make.top.equalToSuperview()
       make.centerX.equalToSuperview()
-      make.width.lessThanOrEqualToSuperview().inset(20)
-    }
-
-    seriesNumberButton.snp.makeConstraints { make in
-      make.width.equalTo(30)
-      make.height.equalTo(30)
+      make.leading.trailing.equalToSuperview().inset(20)
     }
 
     seriesButtonStackView.snp.makeConstraints { make in
       make.top.equalTo(bookTitleLable.snp.bottom).offset(16)
       make.centerX.equalToSuperview()
-      make.bottom.equalToSuperview().inset(10)
+      make.bottom.equalToSuperview()
     }
   }
 
   func updateTitle(to newTitle: String) {
       bookTitleLable.text = newTitle
   }
+
 }
