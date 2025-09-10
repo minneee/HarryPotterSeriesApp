@@ -66,7 +66,7 @@ extension ChapterListView {
 
   func setupConstraints() {
     chaptersStackView.snp.makeConstraints { make in
-      make.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(20)
+      make.leading.trailing.equalTo(self.safeAreaLayoutGuide)
       make.top.bottom.equalToSuperview()
     }
   }

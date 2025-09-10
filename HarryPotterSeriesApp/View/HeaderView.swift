@@ -83,7 +83,7 @@ extension HeaderView {
     bookTitleLable.snp.makeConstraints { make in
       make.top.equalToSuperview()
       make.centerX.equalToSuperview()
-      make.leading.trailing.equalToSuperview().inset(20)
+      make.leading.trailing.equalToSuperview()
     }
 
     seriesButtonStackView.snp.makeConstraints { make in

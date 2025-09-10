@@ -47,13 +47,4 @@ struct Book: Codable {
 
 struct Chapter: Codable {
   var title: String
-
-  enum CodingKeys: String, CodingKey {
-    case title
-  }
-
-  init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: CodingKeys.self)
-    title = try container.decode(String.self, forKey: .title)
-  }
 }

@@ -22,6 +22,10 @@ class BookViewController: UIViewController {
     self.rootView.onSeriesButtonTapped = { [weak self] index in
       self?.viewModel.selectBook(at: index)
     }
+
+    self.rootView.onToggleSummaryButtonTapped = { [weak self] in
+      self?.viewModel.toggleSummaryExpansion()
+    }
   }
 
   required init?(coder: NSCoder) {
@@ -51,7 +55,7 @@ class BookViewController: UIViewController {
       .sink { [weak self] currentBook in
         guard let self = self, let book = currentBook else {
           self?.rootView.updateTitle(newTitle: "정보 없음")
-          self?.rootView.updateBookInfo(bookInfo: nil)
+          self?.rootView.updateBookInfo(bookInfo: nil, isInitiallyExpanded: false)
           self?.rootView.updateBookImage(name: "harrypotter1")
           self?.rootView.updateChapterList(chapters: [])
           return
@@ -62,7 +66,8 @@ class BookViewController: UIViewController {
         let imageName = self.viewModel.coverImageName
 
         self.rootView.updateTitle(newTitle: displayBook.title)
-        self.rootView.updateBookInfo(bookInfo: displayBook)
+        let isExpanded = self.viewModel.isCurrentSummaryExpanded
+        self.rootView.updateBookInfo(bookInfo: displayBook, isInitiallyExpanded: isExpanded)
         self.rootView.updateBookImage(name: imageName)
         self.rootView.updateChapterList(chapters: displayBook.chapters)
       }

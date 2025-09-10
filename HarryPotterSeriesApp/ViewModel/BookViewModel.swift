@@ -13,29 +13,25 @@ protocol BookViewModelProtocol {
   var errorMessagePublisher: Published<String?>.Publisher { get }
 
   var formattedReleaseDate: String { get }
-  var pages: String { get }
   var coverImageName: String { get }
+  var isCurrentSummaryExpanded: Bool { get }
 
   func fetchData()
   func selectBook(at index: Int)
+  func toggleSummaryExpansion()
 }
 
 class BookViewModel: BookViewModelProtocol {
   @Published var bookInfo: [Book]?
   @Published var currentBook: Book?
   @Published var errorMessage: String?
+  @Published private var summaryExpansionStates: [String: Bool]
   var bookInfoPublisher: Published<[Book]?>.Publisher { $bookInfo }
   var currentBookPublisher: Published<Book?>.Publisher { $currentBook }
   var errorMessagePublisher: Published<String?>.Publisher { $errorMessage }
 
   var formattedReleaseDate: String {
     currentBook?.releaseDate.toFormattedDateString() ?? "날짜 정보 없음"
-  }
-  var pages: String {
-    if let pages = currentBook?.pages {
-      return "\(pages)"
-    }
-    return ""
   }
 
   var coverImageName: String {
@@ -50,17 +46,25 @@ class BookViewModel: BookViewModelProtocol {
     return "harrypotter1"
   }
 
+  var isCurrentSummaryExpanded: Bool {
+    guard let currentBookTitle = currentBook?.title else { return false }
+    return summaryExpansionStates[currentBookTitle] ?? false
+  }
 
-  private let repository: BookRepositoryProtocol
 
-  init(bookInfo: [Book]? = nil, repository: BookRepositoryProtocol) {
+  private let bookRepository: BookRepositoryProtocol
+  private let expansionStateRepository: ExpansionStateRepositoryProtocol
+
+  init(bookInfo: [Book]? = nil, bookRepository: BookRepositoryProtocol, expansionStateRepository: ExpansionStateRepositoryProtocol) {
     self.bookInfo = bookInfo
-    self.repository = repository
+    self.bookRepository = bookRepository
+    self.expansionStateRepository = expansionStateRepository
+    self.summaryExpansionStates = expansionStateRepository.load()
   }
 
   func fetchData() {
     do {
-      let books = try repository.fetchBooks()
+      let books = try bookRepository.fetchBooks()
       self.bookInfo = books
       self.currentBook = books.first
     } catch {
@@ -72,6 +76,15 @@ class BookViewModel: BookViewModelProtocol {
   func selectBook(at index: Int) {
     guard let books = bookInfo, books.indices.contains(index) else { return }
     self.currentBook = books[index]
+  }
+
+  func toggleSummaryExpansion() {
+    guard let currentBookTitle = currentBook?.title else { return }
+    let currentState = summaryExpansionStates[currentBookTitle] ?? false
+    summaryExpansionStates[currentBookTitle] = !currentState
+    expansionStateRepository.save(state: summaryExpansionStates)
+
+    self.currentBook = self.currentBook
   }
 }
 

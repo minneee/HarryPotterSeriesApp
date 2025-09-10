@@ -19,8 +19,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     // window 에게 루트 뷰 지정
     let rootView = MainView()
-    let repository = BookRepository()
-    let viewModel = BookViewModel(repository: repository)
+    let bookRepository = BookRepository()
+    let expansionStateRepository = ExpansionStateRepository()
+    let viewModel = BookViewModel(bookRepository: bookRepository, expansionStateRepository: expansionStateRepository)
     window.rootViewController = BookViewController(rootView: rootView, viewModel: viewModel)
 
     // 이 메서드를 반드시 작성해줘야 윈도우가 활성화 됨

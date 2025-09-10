@@ -43,6 +43,7 @@ class MainView: UIView {
   }()
 
   var onSeriesButtonTapped: ((Int) -> Void)?
+  var onToggleSummaryButtonTapped: (() -> Void)?
 
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -51,6 +52,10 @@ class MainView: UIView {
 
     headerView.onSeriesButtonTapped = { [weak self] index in
       self?.onSeriesButtonTapped?(index)
+    }
+
+    bookInfoView.onToggleSummaryButtonTapped = { [weak self] in
+      self?.onToggleSummaryButtonTapped?()
     }
   }
   
@@ -84,7 +89,7 @@ extension MainView {
   func setupConstraints() {
     headerView.snp.makeConstraints { make in
       make.top.equalTo(self.safeAreaLayoutGuide).offset(10)
-      make.leading.trailing.equalToSuperview()
+      make.leading.trailing.equalToSuperview().inset(20)
     }
 
     scrollView.snp.makeConstraints { make in
@@ -100,7 +105,7 @@ extension MainView {
 
     bookContentStackView.snp.makeConstraints { make in
       make.top.equalToSuperview().offset(20)
-      make.leading.trailing.equalToSuperview()
+      make.leading.trailing.equalToSuperview().inset(20)
       make.bottom.equalToSuperview()
     }
   }
@@ -109,8 +114,8 @@ extension MainView {
     headerView.updateTitle(newTitle: newTitle)
   }
 
-  func updateBookInfo(bookInfo: Book?) {
-    bookInfoView.updateBookInfo(bookInfo: bookInfo)
+  func updateBookInfo(bookInfo: Book?, isInitiallyExpanded: Bool) {
+    bookInfoView.updateBookInfo(bookInfo: bookInfo, isInitiallyExpanded: isInitiallyExpanded)
   }
 
   func updateBookImage(name: String) {

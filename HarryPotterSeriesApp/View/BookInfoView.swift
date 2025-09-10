@@ -148,11 +148,19 @@ class BookInfoView: UIView {
     return label
   }()
 
+  private let summaryToggleButton: UIButton = {
+    let button = UIButton(type: .system)
+    button.setTitle("더보기", for: .normal)
+    button.titleLabel?.font = .systemFont(ofSize: 14, weight: .semibold)
+    button.contentHorizontalAlignment = .trailing
+    return button
+  }()
+
   private let summaryStackView: UIStackView = {
     let stackView = UIStackView()
     stackView.axis = .vertical
     stackView.spacing = 8
-    stackView.alignment = .leading
+//    stackView.alignment = .leading
     return stackView
   }()
 
@@ -164,14 +172,22 @@ class BookInfoView: UIView {
     return stackView
   }()
 
+  var onToggleSummaryButtonTapped: (() -> Void)?
+
   override init(frame: CGRect) {
     super.init(frame: frame)
     setupConfigures()
     setupViews()
+
+    summaryToggleButton.addTarget(self, action: #selector(toggleSummary), for: .touchUpInside)
   }
 
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+
+  @objc private func toggleSummary() {
+    onToggleSummaryButtonTapped?()
   }
 }
 
@@ -205,6 +221,7 @@ extension BookInfoView {
 
     summaryStackView.addArrangedSubview(summaryTitleLabel)
     summaryStackView.addArrangedSubview(summaryLabel)
+    summaryStackView.addArrangedSubview(summaryToggleButton)
 
     bookStackView.addArrangedSubview(bookInfoStackView)
     bookStackView.addArrangedSubview(dedicationStackView)
@@ -220,12 +237,12 @@ extension BookInfoView {
     }
 
     bookStackView.snp.makeConstraints { make in
-      make.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(20)
+      make.leading.trailing.equalTo(self.safeAreaLayoutGuide)
       make.top.bottom.equalToSuperview()
     }
   }
 
-  func updateBookInfo(bookInfo: Book?) {
+  func updateBookInfo(bookInfo: Book?, isInitiallyExpanded: Bool) {
     guard let bookInfo else { return }
     bookTitleLabel.text = bookInfo.title
     authorLabel.text = bookInfo.author
@@ -233,9 +250,29 @@ extension BookInfoView {
     pageLabel.text = String(bookInfo.pages)
     dedicationLabel.text = bookInfo.dedication
     summaryLabel.text = bookInfo.summary
+    updateSummaryExpanded(summary: bookInfo.summary, isExpanded: isInitiallyExpanded)
+
   }
 
   func updateImage(name: String) {
     bookImageView.image = UIImage(named: name)
+  }
+
+  func updateSummaryExpanded(summary: String, isExpanded: Bool) {
+    guard summary.count >= 450 else {
+      summaryLabel.text = summary
+      summaryToggleButton.isHidden = true
+      return
+    }
+
+    summaryToggleButton.isHidden = false
+
+    if isExpanded {
+      summaryLabel.text = summary
+      summaryToggleButton.setTitle("접기", for: .normal)
+    } else {
+      summaryLabel.text = String(summary.prefix(450)) + "..."
+      summaryToggleButton.setTitle("더보기", for: .normal)
+    }
   }
 }
