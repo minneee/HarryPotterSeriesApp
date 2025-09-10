@@ -58,6 +58,7 @@ class BookViewController: UIViewController {
           self?.rootView.updateBookInfo(bookInfo: nil, isInitiallyExpanded: false)
           self?.rootView.updateBookImage(name: "harrypotter1")
           self?.rootView.updateChapterList(chapters: [])
+          self?.rootView.updateButtonSelection(selectedIndex: nil)
           return
         }
 
@@ -70,6 +71,7 @@ class BookViewController: UIViewController {
         self.rootView.updateBookInfo(bookInfo: displayBook, isInitiallyExpanded: isExpanded)
         self.rootView.updateBookImage(name: imageName)
         self.rootView.updateChapterList(chapters: displayBook.chapters)
+        self.rootView.updateButtonSelection(selectedIndex: self.viewModel.currentBookIndex)
       }
       .store(in: &cancellables)
 

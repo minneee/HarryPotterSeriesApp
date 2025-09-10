@@ -47,7 +47,8 @@ class HeaderView: UIView {
     for i in 0..<count {
       let button = UIButton()
       button.setTitle("\(i + 1)", for: .normal)
-      button.backgroundColor = .systemBlue
+      button.backgroundColor = .systemGray5
+      button.setTitleColor(.systemBlue, for: .normal)
       button.titleLabel?.font = .systemFont(ofSize: 16)
       button.layer.cornerRadius = 15
 
@@ -95,6 +96,18 @@ extension HeaderView {
 
   func updateTitle(newTitle: String) {
       bookTitleLable.text = newTitle
+  }
+
+  func updateButtonSelection(selectedIndex: Int?) {
+    for case let button as UIButton in seriesButtonStackView.arrangedSubviews {
+      if button.tag == selectedIndex {
+        button.backgroundColor = .systemBlue
+        button.setTitleColor(.white, for: .normal)
+      } else {
+        button.backgroundColor = .systemGray5
+        button.setTitleColor(.systemBlue, for: .normal)
+      }
+    }
   }
 
 }

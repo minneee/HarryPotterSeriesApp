@@ -15,6 +15,7 @@ protocol BookViewModelProtocol {
   var formattedReleaseDate: String { get }
   var coverImageName: String { get }
   var isCurrentSummaryExpanded: Bool { get }
+  var currentBookIndex: Int? { get }
 
   func fetchData()
   func selectBook(at index: Int)
@@ -51,6 +52,10 @@ class BookViewModel: BookViewModelProtocol {
     return summaryExpansionStates[currentBookTitle] ?? false
   }
 
+  var currentBookIndex: Int? {
+    guard let currentBook = currentBook, let books = bookInfo else { return nil }
+    return books.firstIndex(where: { $0.title == currentBook.title })
+  }
 
   private let bookRepository: BookRepositoryProtocol
   private let expansionStateRepository: ExpansionStateRepositoryProtocol

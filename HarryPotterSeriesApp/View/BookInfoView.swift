@@ -237,7 +237,7 @@ extension BookInfoView {
     }
 
     bookStackView.snp.makeConstraints { make in
-      make.leading.trailing.equalTo(self.safeAreaLayoutGuide)
+      make.leading.trailing.equalToSuperview()
       make.top.bottom.equalToSuperview()
     }
   }

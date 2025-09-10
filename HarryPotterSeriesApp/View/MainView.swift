@@ -89,7 +89,7 @@ extension MainView {
   func setupConstraints() {
     headerView.snp.makeConstraints { make in
       make.top.equalTo(self.safeAreaLayoutGuide).offset(10)
-      make.leading.trailing.equalToSuperview().inset(20)
+      make.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(20)
     }
 
     scrollView.snp.makeConstraints { make in
@@ -105,8 +105,8 @@ extension MainView {
 
     bookContentStackView.snp.makeConstraints { make in
       make.top.equalToSuperview().offset(20)
-      make.leading.trailing.equalToSuperview().inset(20)
-      make.bottom.equalToSuperview()
+      make.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(20)
+      make.bottom.equalToSuperview().inset(10)
     }
   }
 
@@ -124,5 +124,9 @@ extension MainView {
 
   func updateChapterList(chapters: [Chapter]) {
     chapterListView.updateChapterList(chapters: chapters)
+  }
+
+  func updateButtonSelection(selectedIndex: Int?) {
+    headerView.updateButtonSelection(selectedIndex: selectedIndex)
   }
 }
