@@ -65,9 +65,6 @@ class HeaderView: UIView {
   @objc private func seriesButtonAction(_ sender: UIButton) {
     onSeriesButtonTapped?(sender.tag)
   }
-
-
-
 }
 
 extension HeaderView {

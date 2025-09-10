@@ -108,6 +108,62 @@ class BookInfoView: UIView {
     return stackView
   }()
 
+  private let dedicationTitleLabel: UILabel = {
+    let label = UILabel()
+    label.text = "Dedication"
+    label.font = .systemFont(ofSize: 18, weight: .bold)
+    label.textColor = .black
+    return label
+  }()
+
+  private let dedicationLabel: UILabel = {
+    let label = UILabel()
+    label.font = .systemFont(ofSize: 14)
+    label.textColor = .darkGray
+    label.numberOfLines = 0
+    return label
+  }()
+
+  private let dedicationStackView: UIStackView = {
+    let stackView = UIStackView()
+    stackView.axis = .vertical
+    stackView.spacing = 8
+    stackView.alignment = .leading
+    return stackView
+  }()
+
+  private let summaryTitleLabel: UILabel = {
+    let label = UILabel()
+    label.text = "Summary"
+    label.font = .systemFont(ofSize: 18, weight: .bold)
+    label.textColor = .black
+    return label
+  }()
+
+  private let summaryLabel: UILabel = {
+    let label = UILabel()
+    label.font = .systemFont(ofSize: 14)
+    label.textColor = .darkGray
+    label.numberOfLines = 0
+    return label
+  }()
+
+  private let summaryStackView: UIStackView = {
+    let stackView = UIStackView()
+    stackView.axis = .vertical
+    stackView.spacing = 8
+    stackView.alignment = .leading
+    return stackView
+  }()
+
+  private let bookStackView: UIStackView = {
+    let stackView = UIStackView()
+    stackView.axis = .vertical
+    stackView.spacing = 24
+    stackView.alignment = .leading
+    return stackView
+  }()
+
   override init(frame: CGRect) {
     super.init(frame: frame)
     setupConfigures()
@@ -125,7 +181,7 @@ extension BookInfoView {
   }
 
   func setupViews() {
-    addSubview(bookInfoStackView)
+    addSubview(bookStackView)
 
     authorStackView.addArrangedSubview(authorTitleLabel)
     authorStackView.addArrangedSubview(authorLabel)
@@ -144,6 +200,16 @@ extension BookInfoView {
     bookInfoStackView.addArrangedSubview(bookImageView)
     bookInfoStackView.addArrangedSubview(bookInfoLableStackView)
 
+    dedicationStackView.addArrangedSubview(dedicationTitleLabel)
+    dedicationStackView.addArrangedSubview(dedicationLabel)
+
+    summaryStackView.addArrangedSubview(summaryTitleLabel)
+    summaryStackView.addArrangedSubview(summaryLabel)
+
+    bookStackView.addArrangedSubview(bookInfoStackView)
+    bookStackView.addArrangedSubview(dedicationStackView)
+    bookStackView.addArrangedSubview(summaryStackView)
+
     setupConstraints()
   }
 
@@ -153,9 +219,9 @@ extension BookInfoView {
       make.height.equalTo(150)
     }
 
-    bookInfoStackView.snp.makeConstraints { make in
+    bookStackView.snp.makeConstraints { make in
       make.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(20)
-      make.top.equalToSuperview()
+      make.top.bottom.equalToSuperview()
     }
   }
 
@@ -165,6 +231,8 @@ extension BookInfoView {
     authorLabel.text = bookInfo.author
     releasedLabel.text = bookInfo.releaseDate
     pageLabel.text = String(bookInfo.pages)
+    dedicationLabel.text = bookInfo.dedication
+    summaryLabel.text = bookInfo.summary
   }
 
   func updateImage(name: String) {

@@ -12,8 +12,6 @@ protocol BookViewModelProtocol {
   var currentBookPublisher: Published<Book?>.Publisher { get }
   var errorMessagePublisher: Published<String?>.Publisher { get }
 
-  var title: String { get }
-  var author: String { get }
   var formattedReleaseDate: String { get }
   var pages: String { get }
   var coverImageName: String { get }
@@ -30,8 +28,6 @@ class BookViewModel: BookViewModelProtocol {
   var currentBookPublisher: Published<Book?>.Publisher { $currentBook }
   var errorMessagePublisher: Published<String?>.Publisher { $errorMessage }
 
-  var title: String { currentBook?.title ?? "제목 없음" }
-  var author: String { currentBook?.author ?? "" }
   var formattedReleaseDate: String {
     currentBook?.releaseDate.toFormattedDateString() ?? "날짜 정보 없음"
   }
