@@ -160,7 +160,6 @@ class BookInfoView: UIView {
     let stackView = UIStackView()
     stackView.axis = .vertical
     stackView.spacing = 8
-//    stackView.alignment = .leading
     return stackView
   }()
 

@@ -9,8 +9,6 @@ import UIKit
 import SnapKit
 
 class HeaderView: UIView {
-
-  //MARK: - UI Property
   private var bookTitleLable: UILabel = {
     let label = UILabel()
     label.text = "책 제목"
@@ -30,7 +28,6 @@ class HeaderView: UIView {
 
   var onSeriesButtonTapped: ((Int) -> Void)?
 
-  //MARK: - initialize
   override init(frame: CGRect) {
     super.init(frame: frame)
     setupConfigures()
