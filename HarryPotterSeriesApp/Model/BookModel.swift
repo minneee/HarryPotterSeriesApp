@@ -46,7 +46,6 @@ struct Book: Codable {
 }
 
 struct Chapter: Codable {
-  var id: UUID
   var title: String
 
   enum CodingKeys: String, CodingKey {
@@ -55,7 +54,6 @@ struct Chapter: Codable {
 
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    id = UUID()
     title = try container.decode(String.self, forKey: .title)
   }
 }

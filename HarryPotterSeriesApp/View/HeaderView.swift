@@ -93,7 +93,7 @@ extension HeaderView {
     }
   }
 
-  func updateTitle(to newTitle: String) {
+  func updateTitle(newTitle: String) {
       bookTitleLable.text = newTitle
   }
 

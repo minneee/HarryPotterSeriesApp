@@ -160,7 +160,7 @@ class BookInfoView: UIView {
     let stackView = UIStackView()
     stackView.axis = .vertical
     stackView.spacing = 24
-    stackView.alignment = .leading
+    stackView.alignment = .fill
     return stackView
   }()
 
@@ -225,7 +225,7 @@ extension BookInfoView {
     }
   }
 
-  func updateBookInfo(to bookInfo: Book?) {
+  func updateBookInfo(bookInfo: Book?) {
     guard let bookInfo else { return }
     bookTitleLabel.text = bookInfo.title
     authorLabel.text = bookInfo.author

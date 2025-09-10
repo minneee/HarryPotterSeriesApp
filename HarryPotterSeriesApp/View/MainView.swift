@@ -13,9 +13,33 @@ class MainView: UIView {
     return view
   }()
 
+  private let scrollView: UIScrollView = {
+    let scrollView = UIScrollView()
+    scrollView.showsVerticalScrollIndicator = false
+    return scrollView
+  }()
+
+  private let contentView: UIView = {
+    let view = UIView()
+    return view
+  }()
+
   private let bookInfoView: BookInfoView = {
     let view = BookInfoView()
     return view
+  }()
+
+  private let chapterListView: ChapterListView = {
+    let view = ChapterListView()
+    return view
+  }()
+
+  private let bookContentStackView: UIStackView = {
+    let stackView = UIStackView()
+    stackView.axis = .vertical
+    stackView.alignment = .fill
+    stackView.spacing = 24
+    return stackView
   }()
 
   var onSeriesButtonTapped: ((Int) -> Void)?
@@ -46,7 +70,13 @@ extension MainView {
 
   func setupViews() {
     addSubview(headerView)
-    addSubview(bookInfoView)
+    addSubview(scrollView)
+
+    scrollView.addSubview(contentView)
+    contentView.addSubview(bookContentStackView)
+
+    bookContentStackView.addArrangedSubview(bookInfoView)
+    bookContentStackView.addArrangedSubview(chapterListView)
 
     setupConstraints()
   }
@@ -57,21 +87,37 @@ extension MainView {
       make.leading.trailing.equalToSuperview()
     }
 
-    bookInfoView.snp.makeConstraints { make in
-      make.top.equalTo(headerView.snp.bottom).offset(30)
+    scrollView.snp.makeConstraints { make in
+      make.top.equalTo(headerView.snp.bottom).offset(10)
+      make.bottom.equalTo(self.safeAreaInsets.bottom)
       make.leading.trailing.equalToSuperview()
+    }
+
+    contentView.snp.makeConstraints { make in
+      make.edges.equalToSuperview()
+      make.width.equalToSuperview()
+    }
+
+    bookContentStackView.snp.makeConstraints { make in
+      make.top.equalToSuperview().offset(20)
+      make.leading.trailing.equalToSuperview()
+      make.bottom.equalToSuperview()
     }
   }
 
-  func updateTitle(to newTitle: String) {
-      headerView.updateTitle(to: newTitle)
+  func updateTitle(newTitle: String) {
+    headerView.updateTitle(newTitle: newTitle)
   }
 
-  func updateBookInfo(to bookInfo: Book?) {
-    bookInfoView.updateBookInfo(to: bookInfo)
+  func updateBookInfo(bookInfo: Book?) {
+    bookInfoView.updateBookInfo(bookInfo: bookInfo)
   }
 
   func updateBookImage(name: String) {
     bookInfoView.updateImage(name: name)
+  }
+
+  func updateChapterList(chapters: [Chapter]) {
+    chapterListView.updateChapterList(chapters: chapters)
   }
 }

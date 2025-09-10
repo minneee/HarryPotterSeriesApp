@@ -50,8 +50,10 @@ class BookViewController: UIViewController {
       .receive(on: DispatchQueue.main)
       .sink { [weak self] currentBook in
         guard let self = self, let book = currentBook else {
-          self?.rootView.updateTitle(to: "정보 없음")
-          self?.rootView.updateBookInfo(to: nil)
+          self?.rootView.updateTitle(newTitle: "정보 없음")
+          self?.rootView.updateBookInfo(bookInfo: nil)
+          self?.rootView.updateBookImage(name: "harrypotter1")
+          self?.rootView.updateChapterList(chapters: [])
           return
         }
 
@@ -59,9 +61,10 @@ class BookViewController: UIViewController {
         displayBook.releaseDate = self.viewModel.formattedReleaseDate
         let imageName = self.viewModel.coverImageName
 
-        self.rootView.updateTitle(to: displayBook.title)
-        self.rootView.updateBookInfo(to: displayBook)
+        self.rootView.updateTitle(newTitle: displayBook.title)
+        self.rootView.updateBookInfo(bookInfo: displayBook)
         self.rootView.updateBookImage(name: imageName)
+        self.rootView.updateChapterList(chapters: displayBook.chapters)
       }
       .store(in: &cancellables)
 
