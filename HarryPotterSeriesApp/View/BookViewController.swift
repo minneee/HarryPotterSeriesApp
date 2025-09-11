@@ -54,24 +54,15 @@ class BookViewController: UIViewController {
       .receive(on: DispatchQueue.main)
       .sink { [weak self] currentBook in
         guard let self = self, let book = currentBook else {
-          self?.rootView.updateTitle(newTitle: "정보 없음")
-          self?.rootView.updateBookInfo(bookInfo: nil, isInitiallyExpanded: false)
-          self?.rootView.updateBookImage(name: "harrypotter1")
-          self?.rootView.updateChapterList(chapters: [])
-          self?.rootView.updateButtonSelection(selectedIndex: nil)
+          self?.rootView.configure(book: nil, imageName: "harrypotter1", isExpanded: false, selectedIndex: nil)
           return
         }
 
         var displayBook = book
         displayBook.releaseDate = self.viewModel.formattedReleaseDate
         let imageName = self.viewModel.coverImageName
-
-        self.rootView.updateTitle(newTitle: displayBook.title)
         let isExpanded = self.viewModel.isCurrentSummaryExpanded
-        self.rootView.updateBookInfo(bookInfo: displayBook, isInitiallyExpanded: isExpanded)
-        self.rootView.updateBookImage(name: imageName)
-        self.rootView.updateChapterList(chapters: displayBook.chapters)
-        self.rootView.updateButtonSelection(selectedIndex: self.viewModel.currentBookIndex)
+        self.rootView.configure(book: displayBook, imageName: imageName, isExpanded: isExpanded, selectedIndex: self.viewModel.currentBookIndex)
       }
       .store(in: &cancellables)
 

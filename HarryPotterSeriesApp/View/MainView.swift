@@ -110,23 +110,31 @@ extension MainView {
     }
   }
 
-  func updateTitle(newTitle: String) {
+  func configure(book: Book?, imageName: String, isExpanded: Bool, selectedIndex: Int?) {
+    updateTitle(newTitle: book?.title ?? "제목 없음")
+    updateBookInfo(bookInfo: book, isInitiallyExpanded: isExpanded)
+    updateBookImage(name: imageName)
+    updateChapterList(chapters: book?.chapters ?? [])
+    updateButtonSelection(selectedIndex: selectedIndex)
+  }
+
+  private func updateTitle(newTitle: String) {
     headerView.updateTitle(newTitle: newTitle)
   }
 
-  func updateBookInfo(bookInfo: Book?, isInitiallyExpanded: Bool) {
+  private func updateBookInfo(bookInfo: Book?, isInitiallyExpanded: Bool) {
     bookInfoView.updateBookInfo(bookInfo: bookInfo, isInitiallyExpanded: isInitiallyExpanded)
   }
 
-  func updateBookImage(name: String) {
+  private func updateBookImage(name: String) {
     bookInfoView.updateImage(name: name)
   }
 
-  func updateChapterList(chapters: [Chapter]) {
+  private func updateChapterList(chapters: [Chapter]) {
     chapterListView.updateChapterList(chapters: chapters)
   }
 
-  func updateButtonSelection(selectedIndex: Int?) {
+  private func updateButtonSelection(selectedIndex: Int?) {
     headerView.updateButtonSelection(selectedIndex: selectedIndex)
   }
 }
