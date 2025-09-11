@@ -16,25 +16,19 @@ class BookInfoView: UIView {
   }()
 
   private let bookTitleLabel: UILabel = {
-    let label = UILabel()
+    let label = TitleLabel(fontSize: 20)
     label.numberOfLines = 0
-    label.font = .systemFont(ofSize: 20, weight: .bold)
-    label.textColor = .black
     return label
   }()
 
   private let authorTitleLabel: UILabel = {
-    let label = UILabel()
+    let label = TitleLabel(fontSize: 16)
     label.text = "Author"
-    label.font = .systemFont(ofSize: 16, weight: .bold)
-    label.textColor = .black
     return label
   }()
 
   private let authorLabel: UILabel = {
-    let label = UILabel()
-    label.font = .systemFont(ofSize: 18)
-    label.textColor = .darkGray
+    let label = BodyLabel(fontSize: 18, textColor: .darkGray)
     return label
   }()
 
@@ -47,17 +41,13 @@ class BookInfoView: UIView {
   }()
 
   private let releasedTitleLabel: UILabel = {
-    let label = UILabel()
+    let label = TitleLabel(fontSize: 14)
     label.text = "Released"
-    label.font = .systemFont(ofSize: 14, weight: .bold)
-    label.textColor = .black
     return label
   }()
 
   private let releasedLabel: UILabel = {
-    let label = UILabel()
-    label.font = .systemFont(ofSize: 14)
-    label.textColor = .gray
+    let label = BodyLabel(fontSize: 14, textColor: .gray)
     return label
   }()
 
@@ -70,17 +60,13 @@ class BookInfoView: UIView {
   }()
 
   private let pageTitleLabel: UILabel = {
-    let label = UILabel()
+    let label = TitleLabel(fontSize: 14)
     label.text = "Pages"
-    label.font = .systemFont(ofSize: 14, weight: .bold)
-    label.textColor = .black
     return label
   }()
 
   private let pageLabel: UILabel = {
-    let label = UILabel()
-    label.font = .systemFont(ofSize: 14)
-    label.textColor = .gray
+    let label = BodyLabel(fontSize: 14, textColor: .gray)
     return label
   }()
 
@@ -109,17 +95,13 @@ class BookInfoView: UIView {
   }()
 
   private let dedicationTitleLabel: UILabel = {
-    let label = UILabel()
+    let label = TitleLabel(fontSize: 18)
     label.text = "Dedication"
-    label.font = .systemFont(ofSize: 18, weight: .bold)
-    label.textColor = .black
     return label
   }()
 
   private let dedicationLabel: UILabel = {
-    let label = UILabel()
-    label.font = .systemFont(ofSize: 14)
-    label.textColor = .darkGray
+    let label = BodyLabel(fontSize: 14, textColor: .darkGray)
     label.numberOfLines = 0
     return label
   }()
@@ -133,17 +115,13 @@ class BookInfoView: UIView {
   }()
 
   private let summaryTitleLabel: UILabel = {
-    let label = UILabel()
+    let label = TitleLabel(fontSize: 18)
     label.text = "Summary"
-    label.font = .systemFont(ofSize: 18, weight: .bold)
-    label.textColor = .black
     return label
   }()
 
   private let summaryLabel: UILabel = {
-    let label = UILabel()
-    label.font = .systemFont(ofSize: 14)
-    label.textColor = .darkGray
+    let label = BodyLabel(fontSize: 14, textColor: .darkGray)
     label.numberOfLines = 0
     return label
   }()

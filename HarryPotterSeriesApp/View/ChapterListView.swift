@@ -11,10 +11,8 @@ import SnapKit
 
 class ChapterListView: UIView {
   private let titleLabel: UILabel = {
-    let label = UILabel()
+    let label = TitleLabel(fontSize: 18)
     label.text = "Chapters"
-    label.font = .systemFont(ofSize: 18, weight: .bold)
-    label.textColor = .black
     return label
   }()
 
@@ -42,10 +40,8 @@ class ChapterListView: UIView {
     chaptersStackView.addArrangedSubview(titleLabel)
 
     for chapter in chapterTitles {
-      let chapterLabel = UILabel()
+      let chapterLabel = BodyLabel(fontSize: 14, textColor: .darkGray)
       chapterLabel.text = chapter.title
-      chapterLabel.font = .systemFont(ofSize: 14)
-      chapterLabel.textColor = .darkGray
       chapterLabel.numberOfLines = 0
       chaptersStackView.addArrangedSubview(chapterLabel)
     }

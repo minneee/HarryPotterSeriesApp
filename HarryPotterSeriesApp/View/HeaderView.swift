@@ -10,10 +10,9 @@ import SnapKit
 
 class HeaderView: UIView {
   private var bookTitleLable: UILabel = {
-    let label = UILabel()
+    let label = TitleLabel(fontSize: 24)
     label.text = "책 제목"
     label.textAlignment = .center
-    label.font = .systemFont(ofSize: 24, weight: .bold)
     label.numberOfLines = 0
     return label
   }()
