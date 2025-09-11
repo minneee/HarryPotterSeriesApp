@@ -11,11 +11,6 @@ protocol BookRepositoryProtocol {
 }
 
 class BookRepository: BookRepositoryProtocol {
-  enum RepositoryError: Error {
-    case fileNotFound
-    case parsingFailed(Error)
-  }
-
   func fetchBooks() throws -> [Book] {
     //프로젝트 번들에서 파일 경로 찾기
     guard let fileURL = Bundle.main.url(forResource: "data", withExtension: "json") else {
