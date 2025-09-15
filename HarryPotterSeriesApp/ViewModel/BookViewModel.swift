@@ -23,9 +23,9 @@ protocol BookViewModelProtocol {
 }
 
 final class BookViewModel: BookViewModelProtocol {
-  @Published var bookInfo: [Book]?
-  @Published var currentBook: Book?
-  @Published var errorMessage: String?
+  @Published private var bookInfo: [Book]?
+  @Published private var currentBook: Book?
+  @Published private var errorMessage: String?
   @Published private var summaryExpansionStates: [String: Bool]
   var bookInfoPublisher: Published<[Book]?>.Publisher { $bookInfo }
   var currentBookPublisher: Published<Book?>.Publisher { $currentBook }
