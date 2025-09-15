@@ -30,3 +30,7 @@ HarryPotterSeriesApp/
 ├── Resources/        # 이미지, JSON 데이터 등 리소스 파일
 └── Extensions/       # 편의성을 위한 확장 기능
 ```
+
+## 📔 트러블 슈팅 TIL
+[Repository Pattern](https://0minnie0.tistory.com/66)
+[UIStackView의 타입과 case let 패턴](https://0minnie0.tistory.com/68)
