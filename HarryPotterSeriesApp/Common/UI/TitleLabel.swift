@@ -6,7 +6,7 @@
 //
 import UIKit
 
-class TitleLabel: UILabel {
+final class TitleLabel: UILabel {
   init(fontSize: CGFloat) {
     super.init(frame: .zero)
     self.font = .systemFont(ofSize: fontSize, weight: .bold)

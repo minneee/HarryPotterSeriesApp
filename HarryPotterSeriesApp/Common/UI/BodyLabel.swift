@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BodyLabel: UILabel {
+final class BodyLabel: UILabel {
   init(fontSize: CGFloat, textColor: UIColor) {
     super.init(frame: .zero)
     self.font = .systemFont(ofSize: fontSize)

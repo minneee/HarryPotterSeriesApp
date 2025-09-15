@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BookInfoView: UIView {
+final class BookInfoView: UIView {
   private let bookImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.image = UIImage(named: "harrypotter1")

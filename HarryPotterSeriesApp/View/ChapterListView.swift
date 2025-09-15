@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-class ChapterListView: UIView {
+final class ChapterListView: UIView {
   private let titleLabel: UILabel = {
     let label = TitleLabel(fontSize: 18)
     label.text = "Chapters"

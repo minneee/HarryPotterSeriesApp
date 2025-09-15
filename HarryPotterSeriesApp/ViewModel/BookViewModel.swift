@@ -22,7 +22,7 @@ protocol BookViewModelProtocol {
   func toggleSummaryExpansion()
 }
 
-class BookViewModel: BookViewModelProtocol {
+final class BookViewModel: BookViewModelProtocol {
   @Published var bookInfo: [Book]?
   @Published var currentBook: Book?
   @Published var errorMessage: String?

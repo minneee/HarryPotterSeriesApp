@@ -12,7 +12,7 @@ protocol ExpansionStateRepositoryProtocol {
   func load() -> [String: Bool]
 }
 
-class ExpansionStateRepository: ExpansionStateRepositoryProtocol {
+final class ExpansionStateRepository: ExpansionStateRepositoryProtocol {
   private let userDefaultsKey = "summaryExpansionState"
 
   func save(state: [String: Bool]) {

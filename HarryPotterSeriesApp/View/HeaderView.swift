@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class HeaderView: UIView {
+final class HeaderView: UIView {
   private var bookTitleLable: UILabel = {
     let label = TitleLabel(fontSize: 24)
     label.text = "책 제목"

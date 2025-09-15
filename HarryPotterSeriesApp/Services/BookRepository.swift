@@ -10,7 +10,7 @@ protocol BookRepositoryProtocol {
   func fetchBooks() throws -> [Book]
 }
 
-class BookRepository: BookRepositoryProtocol {
+final class BookRepository: BookRepositoryProtocol {
   func fetchBooks() throws -> [Book] {
     //프로젝트 번들에서 파일 경로 찾기
     guard let fileURL = Bundle.main.url(forResource: "data", withExtension: "json") else {

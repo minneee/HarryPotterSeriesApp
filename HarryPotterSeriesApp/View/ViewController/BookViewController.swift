@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class BookViewController: UIViewController {
+final class BookViewController: UIViewController {
   private let rootView: MainView
   private let viewModel: BookViewModelProtocol
 
