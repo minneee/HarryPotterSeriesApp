@@ -60,7 +60,10 @@ class BookViewModel: BookViewModelProtocol {
   private let bookRepository: BookRepositoryProtocol
   private let expansionStateRepository: ExpansionStateRepositoryProtocol
 
-  init(bookInfo: [Book]? = nil, bookRepository: BookRepositoryProtocol, expansionStateRepository: ExpansionStateRepositoryProtocol) {
+  init(bookInfo: [Book]? = nil,
+       bookRepository: BookRepositoryProtocol,
+       expansionStateRepository: ExpansionStateRepositoryProtocol
+  ) {
     self.bookInfo = bookInfo
     self.bookRepository = bookRepository
     self.expansionStateRepository = expansionStateRepository
